@@ -1,5 +1,6 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 
@@ -10,8 +11,23 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new InMemoryCarDal());
+            //oldConsol(carManager);
+            CarManager efcarManager = new CarManager(new EfCarDal());
+            foreach (var car in efcarManager.GetAll())
+            {
+                Console.WriteLine(car.ModelYear);
+            }
+
+            foreach (var car in efcarManager.GetAllByBrandId(1))
+            {
+                Console.WriteLine(car.Description);
+            }
+        }
+
+        private static void oldConsol(CarManager carManager)
+        {
             int loop = 1;
-            int selectedCarid;
+            //int selectedCarid;
             while (loop == 1)
             {
                 Console.WriteLine("Yapmak istediğiniz işlemi seçip enter tuşuna basınız.");
@@ -21,7 +37,7 @@ namespace ConsoleUI
                 Console.WriteLine("Araç Bilgilerini Güncellemek     4");
 
                 int stoper = Convert.ToInt32(Console.ReadLine());
-                Car selectedCar;
+                //Car selectedCar;
                 switch (stoper)
                 {
                     case 1:
@@ -33,87 +49,79 @@ namespace ConsoleUI
                         }
                         break;
 
-                    case 2:
-                        Console.WriteLine("Marka Filtreli Arama");
-                        Console.WriteLine("Filtrelemek istediğiniz Marka(BMW = 1 , Audi = 2, Mercedes = 3)");
-                        int filtre = Convert.ToInt32(Console.ReadLine());
-                        foreach (var car in carManager.GetAllByBrand(filtre))
-                        {
-                            Console.WriteLine("Arac Id:             " + car.Id);
-                            Console.WriteLine("Arac Marka ID:       " + car.BrandId);
-                            Console.WriteLine("Açıklama:            " + car.Description);
-                            Console.WriteLine("Arac RenkId:         " + car.ColorId);
-                            Console.WriteLine("Arac Günlük Ücret:   " + car.DailyPrice);
-                            Console.WriteLine("Aracın Model Yılı:   " + car.ModelYear);
-                            Console.WriteLine("---");
+                    //case 2:
+                    //    Console.WriteLine("Marka Filtreli Arama");
+                    //    Console.WriteLine("Filtrelemek istediğiniz Marka(BMW = 1 , Audi = 2, Mercedes = 3)");
+                    //    int filtre = Convert.ToInt32(Console.ReadLine());
+                    //    foreach (var car in carManager.GetAllByBrand(filtre))
+                    //    {
+                    //        Console.WriteLine("Arac Id:             " + car.Id);
+                    //        Console.WriteLine("Arac Marka ID:       " + car.BrandId);
+                    //        Console.WriteLine("Açıklama:            " + car.Description);
+                    //        Console.WriteLine("Arac RenkId:         " + car.ColorId);
+                    //        Console.WriteLine("Arac Günlük Ücret:   " + car.DailyPrice);
+                    //        Console.WriteLine("Aracın Model Yılı:   " + car.ModelYear);
+                    //        Console.WriteLine("---");
 
-                        }
-                        break;
+                    //    }
+                    //    break;
 
-                    case 3:
-                        Console.WriteLine("--Yeni Araç ekleme Ekranı--");
+                    //case 3:
+                    //    Console.WriteLine("--Yeni Araç ekleme Ekranı--");
 
-                        Console.WriteLine("Arac Id:             ");
-                        int createdtempcarid = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Arac Marka ID:       ");
-                        int createdtempcarbrandid = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Açıklama:            ");
-                        string createdtempcardescription = Console.ReadLine();
-                        Console.WriteLine("Arac RenkId:         ");
-                        int createdtempcarcolorid = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Arac Günlük Ücret:   ");
-                        double createdtempcardailyprice = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Aracın Model Yılı:   ");
-                        string createdtempcarmodelyear = Console.ReadLine();
-                        Console.WriteLine("---");
+                    //    Console.WriteLine("Arac Id:             ");
+                    //    int createdtempcarid = Convert.ToInt32(Console.ReadLine());
+                    //    Console.WriteLine("Arac Marka ID:       ");
+                    //    int createdtempcarbrandid = Convert.ToInt32(Console.ReadLine());
+                    //    Console.WriteLine("Açıklama:            ");
+                    //    string createdtempcardescription = Console.ReadLine();
+                    //    Console.WriteLine("Arac RenkId:         ");
+                    //    int createdtempcarcolorid = Convert.ToInt32(Console.ReadLine());
+                    //    Console.WriteLine("Arac Günlük Ücret:   ");
+                    //    double createdtempcardailyprice = Convert.ToDouble(Console.ReadLine());
+                    //    Console.WriteLine("Aracın Model Yılı:   ");
+                    //    string createdtempcarmodelyear = Console.ReadLine();
+                    //    Console.WriteLine("---");
 
-                        carManager.Add(new Car { Id = createdtempcarid, BrandId = createdtempcarbrandid, ColorId = createdtempcarcolorid, ModelYear = createdtempcarmodelyear, DailyPrice = createdtempcardailyprice, Description = createdtempcardescription });
-                        Console.WriteLine("Aracınız Eklendi");
-                        break;
+                    //    carManager.Add(new Car { Id = createdtempcarid, BrandId = createdtempcarbrandid, ColorId = createdtempcarcolorid, ModelYear = createdtempcarmodelyear, DailyPrice = createdtempcardailyprice, Description = createdtempcardescription });
+                    //    Console.WriteLine("Aracınız Eklendi");
+                    //    break;
 
-                    case 4:
-                        Console.WriteLine("Araç Bilgilerini Güncelleme Ekranı.");
-                        Console.WriteLine("Güncellenecek aracın id");
-                        selectedCarid = Convert.ToInt32(Console.ReadLine());
-                        selectedCar = carManager.GetById(selectedCarid);
-                        Console.WriteLine("Arac Marka ID:       (" + selectedCar.BrandId + ")");
-                        selectedCar.BrandId = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Açıklama:            (" + selectedCar.Description + ")");
-                        selectedCar.Description = Console.ReadLine();
-                        Console.WriteLine("Arac RenkId:         (" + selectedCar.ColorId + ")");
-                        selectedCar.ColorId = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("Arac Günlük Ücret:   (" + selectedCar.DailyPrice + ")");
-                        selectedCar.DailyPrice = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("Aracın Model Yılı:   (" + selectedCar.ModelYear + ")");
-                        selectedCar.ModelYear = Console.ReadLine();
-                        Console.WriteLine("---");
+                    //case 4:
+                    //    Console.WriteLine("Araç Bilgilerini Güncelleme Ekranı.");
+                    //    Console.WriteLine("Güncellenecek aracın id");
+                    //    selectedCarid = Convert.ToInt32(Console.ReadLine());
+                    //    selectedCar = carManager.GetById(selectedCarid);
+                    //    Console.WriteLine("Arac Marka ID:       (" + selectedCar.BrandId + ")");
+                    //    selectedCar.BrandId = Convert.ToInt32(Console.ReadLine());
+                    //    Console.WriteLine("Açıklama:            (" + selectedCar.Description + ")");
+                    //    selectedCar.Description = Console.ReadLine();
+                    //    Console.WriteLine("Arac RenkId:         (" + selectedCar.ColorId + ")");
+                    //    selectedCar.ColorId = Convert.ToInt32(Console.ReadLine());
+                    //    Console.WriteLine("Arac Günlük Ücret:   (" + selectedCar.DailyPrice + ")");
+                    //    selectedCar.DailyPrice = Convert.ToDouble(Console.ReadLine());
+                    //    Console.WriteLine("Aracın Model Yılı:   (" + selectedCar.ModelYear + ")");
+                    //    selectedCar.ModelYear = Console.ReadLine();
+                    //    Console.WriteLine("---");
 
-                        carManager.Update(selectedCar);
-                        Console.WriteLine("Bilgiler Başarı ile Güncellendi. ");
-                        break;
+                    //    carManager.Update(selectedCar);
+                    //    Console.WriteLine("Bilgiler Başarı ile Güncellendi. ");
+                    //    break;
 
-                    case 5:
-                        Console.WriteLine("Silinecek aracın id");
-                        selectedCarid = Convert.ToInt32(Console.ReadLine());
-                        selectedCar = carManager.GetById(selectedCarid);
-                        carManager.Delete(selectedCar);
-                        break;
-                    default:
-                        Console.WriteLine("Hatalı Giriş yaptınız!!");
-                        break;
+                    //case 5:
+                    //    Console.WriteLine("Silinecek aracın id");
+                    //    selectedCarid = Convert.ToInt32(Console.ReadLine());
+                    //    selectedCar = carManager.GetById(selectedCarid);
+                    //    carManager.Delete(selectedCar);
+                    //    break;
+                    //default:
+                    //    Console.WriteLine("Hatalı Giriş yaptınız!!");
+                    //    break;
                 }
                 Console.WriteLine("Başka bir işlem yapmak istiyor musunuz?");
                 Console.WriteLine("Evet = 1 , Hayır (Çıkış) = 0");
                 loop = Convert.ToInt32(Console.ReadLine());
             }
-
-
-
-
-
-
-
-
         }
     }
 }
