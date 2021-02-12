@@ -15,17 +15,33 @@ namespace ConsoleUI
             CarManager efcarManager = new CarManager(new EfCarDal());
             //efcarmanagertest(efcarManager);
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            //BrandTest(brandManager);
-
-            foreach (var car in efcarManager.GetCarDetails())
+            //BrandTest(brandManager); 
+            //JoinTest(efcarManager);
+            var result = efcarManager.GetCarDetails();
+            if (result.Success)
             {
-                Console.WriteLine(car.Description+" / "+car.BranName);
+                foreach (var car in efcarManager.GetCarDetails().Data)
+                {
+                    Console.WriteLine(car.Description + " / " + car.BranName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void JoinTest(CarManager efcarManager)
+        {
+            foreach (var car in efcarManager.GetCarDetails().Data)
+            {
+                Console.WriteLine(car.Description + " / " + car.BranName);
             }
         }
 
         private static void BrandTest(BrandManager brandManager)
         {
-            foreach (var brand in brandManager.GetAll())
+            foreach (var brand in brandManager.GetAll().Data)
             {
                 Console.WriteLine(brand.Name);
             }
@@ -33,12 +49,12 @@ namespace ConsoleUI
 
         private static void efcarmanagertest(CarManager efcarManager)
         {
-            foreach (var car in efcarManager.GetAll())
+            foreach (var car in efcarManager.GetAll().Data)
             {
                 Console.WriteLine(car.ModelYear);
             }
 
-            foreach (var car in efcarManager.GetAllByBrandId(1))
+            foreach (var car in efcarManager.GetAllByBrandId(1).Data)
             {
                 Console.WriteLine(car.Description);
             }
@@ -61,7 +77,7 @@ namespace ConsoleUI
                 switch (stoper)
                 {
                     case 1:
-                        foreach (var car in carManager.GetAll())
+                        foreach (var car in carManager.GetAll().Data)
                         {
                             Console.WriteLine(car);
                             Console.WriteLine("Arac Id: " + car.Id + " Arac Marka ID: " + car.BrandId + " Arac RenkId: " + car.ColorId + " Arac Günlük Ücret: " + car.DailyPrice + " Aracın Model Yılı: " + car.ModelYear + " Açıklama: " + car.Description);
