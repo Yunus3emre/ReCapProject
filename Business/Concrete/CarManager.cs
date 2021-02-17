@@ -30,27 +30,27 @@ namespace Business.Concrete
         public IResult Update(Car car)
         {
             _carDal.Add(car);
-            return new Result(true, "Eklendi");
+            return new Result(true, Messages.Success);
         }
         public IDataResult<List<Car>> GetAll()
         {
-            return new DataResult<List<Car>>(_carDal.GetAll(),true,Messages.CarAdded);            
+            return new DataResult<List<Car>>(_carDal.GetAll(),true,Messages.Success);            
         }        
 
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            return new Result(true, "Eklendi");
+            return new Result(true, "Silme işlemi Başarılı");
         }
 
         public IDataResult<List<Car>> GetAllByBrandId(int id)
         {
-            return new DataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id), true);            
+            return new DataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id), true,Messages.Success);            
         }
 
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
-            return new SuccesDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice <= max && c.DailyPrice >= min));
+            return new SuccesDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice <= max && c.DailyPrice >= min),Messages.Success);
             
         }
 

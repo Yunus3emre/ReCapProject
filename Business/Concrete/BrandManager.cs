@@ -24,7 +24,16 @@ namespace Business.Concrete
             _brandDal.Add(brand);
             return new Result(true, Messages.CarAdded);
         }
-
+        public IResult Update(Brand brand)
+        {
+            _brandDal.Update(brand);
+            return new Result(true, "Güncelleme"+Messages.Success);
+        }
+        public IResult Delete(Brand brand)
+        {
+            _brandDal.Delete(brand);
+            return new Result(true, "Silme işlemi Başarılı");
+        }
         public IDataResult<List<Brand>> GetAll()
         {
             //iş kodları

@@ -8,5 +8,7 @@ namespace Business.Constants
     {
         public static string CarAdded = "Araç Eklendi";
         public static string CarDescriptionInvalid = "Araç açıklaması geçersiz";
+        public static string Success = "İşlem Başarılı";
+        
     }
 }
