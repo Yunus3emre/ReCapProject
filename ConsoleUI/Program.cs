@@ -22,7 +22,7 @@ namespace ConsoleUI
             {
                 foreach (var car in efcarManager.GetCarDetails().Data)
                 {
-                    Console.WriteLine(car.Description + " / " + car.BranName);
+                    Console.WriteLine(car.Description + " / " + car.BrandName);
                 }
             }
             else
@@ -35,7 +35,7 @@ namespace ConsoleUI
         {
             foreach (var car in efcarManager.GetCarDetails().Data)
             {
-                Console.WriteLine(car.Description + " / " + car.BranName);
+                Console.WriteLine(car.Description + " / " + car.BrandName);
             }
         }
 

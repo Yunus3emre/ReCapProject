@@ -74,7 +74,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet]
+        [HttpGet("getbydailyprice")]
         public IActionResult GetByDailyPrice(decimal min, decimal max)
         {
             var result = _carService.GetByDailyPrice( min, max);
