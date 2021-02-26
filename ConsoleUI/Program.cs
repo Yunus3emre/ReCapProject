@@ -9,10 +9,9 @@ namespace ConsoleUI
     class Program
     {
         static void Main(string[] args)
-        {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-            //oldConsol(carManager);
-            CarManager efcarManager = new CarManager(new EfCarDal());
+        {            
+            
+            CarManager efcarManager = new CarManager(new EfCarDal(),new BrandManager(new EfBrandDal()));
             //efcarmanagertest(efcarManager);
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             //BrandTest(brandManager); 

@@ -40,5 +40,9 @@ namespace Business.Constants
         public static string FailedRentalAddOrUpdate = "Bu araba henüz teslim edilmediği için kiralayamazsınız.";
         public static string ReturnedRental = "Kiraladığınız araç teslim edildi.";
 
+        public static string CarCountOfBrandError = "Bu kategori dolu.";
+        public static string CarDescriptionAlreadyExists = "Araç Açıklaması zaten kullanılıyor.";
+
+        public static string CheckIfBrandLimitExceded = "Marka limiti aşıldı";
     }
 }
