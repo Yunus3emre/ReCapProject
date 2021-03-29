@@ -117,5 +117,10 @@ namespace Business.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public IDataResult<List<Car>> GetAllByColorId(int id)
+        {
+            return new DataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id), true, Messages.Success);
+        }
     }
 }

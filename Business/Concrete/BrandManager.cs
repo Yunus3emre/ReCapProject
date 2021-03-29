@@ -36,16 +36,12 @@ namespace Business.Concrete
         }
         public IDataResult<List<Brand>> GetAll()
         {
-            //iş kodları
             return new DataResult<List<Brand>>(_brandDal.GetAll(),true,"Markalar Listelendi");
-           
         }
 
         public IDataResult<Brand> GetById(int brandId)
         {
-            return new SuccesDataResult<Brand>(_brandDal.Get(b=>b.BrandId==brandId));
-            //return _brandDal.Get(b => b.BrandId == brandId);
-            
+            return new SuccesDataResult<Brand>(_brandDal.Get(b=>b.BrandId==brandId));            
         }
     }
 }

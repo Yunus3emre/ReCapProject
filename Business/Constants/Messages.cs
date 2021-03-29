@@ -44,19 +44,18 @@ namespace Business.Constants
 
         public static string CarCountOfBrandError = "Bu kategori dolu.";
         public static string CarDescriptionAlreadyExists = "Araç Açıklaması zaten kullanılıyor.";
-
         public static string CheckIfBrandLimitExceded = "Marka limiti aşıldı";
-
         public static string AddedCarImage = "Araç Resmi eklendi";
-
         public static string DeletedCarImage = "Araç Resmi Silindi";
-
         public static string AuthorizationDenied = "Yetkilendirme Başarısız";
-        internal static string UserRegistered = "Kayıt Olundu";
-        internal static string UserNotFound = "Kullanıcı Bulunamadı";
-        internal static string PasswordError = "Şifre Hatalı";
-        internal static string SuccessfulLogin = "Giriş Başarılı";
-        internal static string UserAlreadyExists = "Bu Kullanıcı Zaten Kayıtlı";
-        internal static string AccessTokenCreated = "Token Oluşturuldu";
+        public static string UserRegistered = "Kayıt Olundu";
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Şifre Hatalı";
+        public static string SuccessfulLogin = "Giriş Başarılı";
+        public static string UserAlreadyExists = "Bu Kullanıcı Zaten Kayıtlı";
+        public static string AccessTokenCreated = "Token Oluşturuldu";
+        public static string ColorListed="Renkler Listelendi";
+        public static string ColorUpdated="Renk güncellendi";
+        public static string ColorDeleted="Renk silindi";
     }
 }
